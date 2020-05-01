@@ -1,7 +1,13 @@
 import { h, render, useState } from './fre.js'
 
 function App() {
-  return 'hello world'
+  const [count, setCount] = useState(0)
+  return (
+    <div>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>+</button>
+    </div>
+  )
 }
 
-render(h(App,{}), document.getElementById('root'))
+render(<App />, document.getElementById('root'))

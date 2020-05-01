@@ -12,7 +12,20 @@ const server = http
     } else if (pathname.endsWith('.js')) {
       res.writeHead(200, { 'Content-Type': 'application/javascript' })
       const filepath = path.join(process.cwd(), pathname.slice(1))
-      return fs.createReadStream(filepath).pipe(res)
+      fs.readFile(filepath, 'utf8', (err, doc) => {
+        const ret = require('@babel/core').transform(doc, {
+          plugins: [
+            [
+              '@babel/plugin-transform-react-jsx',
+              {
+                pragma: 'h',
+                pragmaFrag: 'Fragment',
+              },
+            ],
+          ],
+        })
+        res.end(ret.code)
+      })
     } else {
       res.end('404')
     }
