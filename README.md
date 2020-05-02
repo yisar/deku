@@ -3,7 +3,7 @@ No-bundle Dev Server for Fre and JSX.
 
 ### run
 ```console
-yarn start
+make run
 ```
 ### todo
 
