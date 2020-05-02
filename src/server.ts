@@ -14,11 +14,16 @@ app.use(logger()).get('/*files', async (c) => {
     return c.redirect('/index.html')
   }
   const f = await readFile(join('.', c.path.slice(1)))
+  const code = decoder(f)
   if (/\.[j|t]sx?$/.test(c.path)) {
     c.response.headers.set('content-type', 'application/javascript')
-    return transform(c.path, decoder(f))
+    return transform(c.path, code)
   } else if (c.path === '/index.html') {
-    return c.htmlBlob(f)
+    const w = await readFile(join('.', 'src/client.js'))
+    const cc = decoder(w)
+    const html = code + '<script type="module">' + cc + '</script>'
+    console.log(html)
+    return c.html(html)
   }
 
   throw new NotFoundException()
@@ -44,8 +49,8 @@ for await (const req of serve(`:${port}`)) {
         const path = event.paths[0]
         const timestamp = new Date().getTime()
         const oldTime = timeMap.get(path)
-        console.log(oldTime,timestamp)
-        if (oldTime + 250 < timestamp||!oldTime) {
+        console.log(oldTime, timestamp)
+        if (oldTime + 250 < timestamp || !oldTime) {
           sock.send(
             JSON.stringify({
               timestamp,

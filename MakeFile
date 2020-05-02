@@ -1,3 +1,2 @@
 run:
 	deno --allow-net --allow-read --unstable ./src/server.ts
-	deno --allow-net --allow-read --unstable ./src/client.js
