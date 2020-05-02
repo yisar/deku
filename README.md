@@ -1,4 +1,4 @@
-# fite
+# deku
 No-bundle Dev Server for Fre and JSX.
 
 ### run
