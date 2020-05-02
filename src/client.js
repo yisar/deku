@@ -1,8 +1,10 @@
 const ws = new WebSocket('ws://localhost:8080/')
 
 ws.onmessage = function (e) {
-  const { timestamp } = JSON.parse(e.data)
+  const {path, timestamp } = JSON.parse(e.data)
   document.body.innerHTML = ''
-  import('./index.js' + `?t=${timestamp}`)
+  const scripts = document.getElementsByTagName('script')
+  const path = scripts[scripts.length - 1].src
+  import(path + `?t=${timestamp}`)
 }
 

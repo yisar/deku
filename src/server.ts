@@ -49,11 +49,11 @@ for await (const req of serve(`:${port}`)) {
         const path = event.paths[0]
         const timestamp = new Date().getTime()
         const oldTime = timeMap.get(path)
-        console.log(oldTime, timestamp)
+        // console.log(oldTime, timestamp)
         if (oldTime + 250 < timestamp || !oldTime) {
           sock.send(
             JSON.stringify({
-              timestamp,
+              timestamp
             })
           )
         }
