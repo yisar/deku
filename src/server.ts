@@ -59,13 +59,6 @@ for await (const req of serve(`:${port}`)) {
         }
         timeMap.set(path, timestamp)
       }
-      while (true) {
-        const { done, value } = await it.next()
-        if (done) break
-        if (typeof value === 'string') {
-          await sock.send(value)
-        }
-      }
     }
   )
 }
