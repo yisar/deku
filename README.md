@@ -3,11 +3,11 @@ No-bundle Dev Server for Fre and JSX.
 
 ### run
 ```console
-make run
+make
 ```
 ### todo
 
-[x] hot reload
+[x] - hot reload
 
 ### License
 MIT ©yisar inspired by vite.
