@@ -1,13 +1,18 @@
 # deku
+
 No-bundle Dev Server for Fre and JSX.
 
 ### run
+
 ```console
 make
 ```
-### todo
 
-- [x] hot reload
+### feat
+
+- [] hot reload
+
+### todo
 
 - [x] cli
 
@@ -20,4 +25,5 @@ This use deno compiler for compiling JSX instead of vue compiler.
 So, no bundle, no JSX compiler, no node……
 
 ### License
+
 MIT ©yisar inspired by vite.
