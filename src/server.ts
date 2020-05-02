@@ -24,9 +24,11 @@ app.use(logger()).get('/*files', async (c) => {
   throw new NotFoundException()
 })
 
+let timeMap = new Map()
+
 //ws server
 const port = '8080'
-console.log(`111`)
+console.log(`${port}`)
 for await (const req of serve(`:${port}`)) {
   const { headers, conn } = req
   acceptWebSocket({
@@ -39,10 +41,19 @@ for await (const req of serve(`:${port}`)) {
       const it = sock.receive()
       const iter = watchFs('/')
       for await (const event of iter) {
-        console.log(event)
-        sock.send(event.paths[0])
+        const path = event.paths[0]
+        const timestamp = new Date().getTime()
+        const oldTime = timeMap.get(path)
+        console.log(oldTime,timestamp)
+        if (oldTime + 250 < timestamp||!oldTime) {
+          sock.send(
+            JSON.stringify({
+              timestamp,
+            })
+          )
+        }
+        timeMap.set(path, timestamp)
       }
-
       while (true) {
         const { done, value } = await it.next()
         if (done) break

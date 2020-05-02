@@ -1,16 +1,12 @@
 <div id="root"></div>
 <script type="module" src="./index.js"></script>
 <script type="module">
-  import { render } from './fre.js'
+  import { render, h } from './fre.js'
   const ws = new WebSocket('ws://localhost:8080/')
 
-  ws.onmessage = function (evt) {
-    console.log(evt.data)
-    import('./index.js').then((mod) => {
-      console.log(mod)
-      const App = mod.default()
-      console.log(App)
-      render(App, document.getElementById('#root'))
-    })
+  ws.onmessage = function (e) {
+    const { timestamp } = JSON.parse(e.data)
+    document.body.innerHTML = ''
+    import('./index.js' + `?t=${timestamp}`)
   }
 </script>
