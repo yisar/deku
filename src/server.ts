@@ -1,6 +1,6 @@
 import { Application, NotFoundException } from 'https://deno.land/x/abc@v0.2.11/mod.ts'
 import { logger } from 'https://deno.land/x/abc@v0.2.11/middleware/logger.ts'
-import { join } from 'https://deno.land/std@v0.42.0/path/mod.ts'
+import { join, posix, win32 } from 'https://deno.land/std@v0.42.0/path/mod.ts'
 import { serve } from 'https://deno.land/std@v0.42.0/http/server.ts'
 import { acceptWebSocket, WebSocket } from 'https://deno.land/std@v0.42.0/ws/mod.ts'
 const { readFile, transpileOnly, watchFs, cwd } = Deno
@@ -22,7 +22,7 @@ app.use(logger()).get('/*files', async (c) => {
     const w = await readFile(join('.', 'src/client.js'))
     const cc = decoder(w)
     const html = code + '<script type="module">' + cc + '</script>'
-    console.log(html)
+    // console.log(html)
     return c.html(html)
   }
 
@@ -43,17 +43,18 @@ for await (const req of serve(`:${port}`)) {
     bufWriter: req.w,
   }).then(
     async (sock: WebSocket): Promise<void> => {
-      const it = sock.receive()
-      const iter = watchFs('/')
+      const iter = watchFs(cwd())
       for await (const event of iter) {
-        const path = event.paths[0]
+        const path = await event.paths[0]
         const timestamp = new Date().getTime()
         const oldTime = timeMap.get(path)
-        // console.log(oldTime, timestamp)
+        const name = path.replace(/\\\\/g, '\\').replace(cwd(), '')
+        console.log(name)
         if (oldTime + 250 < timestamp || !oldTime) {
           sock.send(
             JSON.stringify({
-              timestamp
+              timestamp,
+              path: name,
             })
           )
         }
