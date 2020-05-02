@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/yisar/fite#readme",
   "dependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-transform-react-jsx": "^7.9.4",
     "nodemon": "^2.0.3",
     "serve": "^11.3.0"
   }
