@@ -9,6 +9,8 @@ make
 
 - [x] hot reload
 
+- [x] cli
+
 #### How is this different form viet?
 
 This is for Fre but not Vue, and use deno instead of node without node_modules.
