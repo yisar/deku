@@ -14,7 +14,7 @@ app.use(logger()).get('/*files', async c => {
   const f = await readFile(join('.', c.path.slice(1)))
   if (/\.[j|t]sx?$/.test(c.path)) {
     c.response.headers.set('content-type', 'application/javascript')
-    return c.string(await transform(c.path, decoder(f)))
+    return transform(c.path, decoder(f))
   } else if (c.path === '/index.html') {
     return c.htmlBlob(f)
   }
