@@ -35,12 +35,12 @@ let timeMap = new Map()
 const port = '8080'
 console.log(`${port}`)
 for await (const req of serve(`:${port}`)) {
-  const { headers, conn } = req
+  const { headers, conn, r, w } = req
   acceptWebSocket({
     conn,
     headers,
-    bufReader: req.r,
-    bufWriter: req.w,
+    bufReader: r,
+    bufWriter: w,
   }).then(
     async (sock: WebSocket): Promise<void> => {
       const iter = watchFs(cwd())
