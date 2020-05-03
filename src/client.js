@@ -1,4 +1,5 @@
-const ws = new WebSocket('ws://localhost:4000/')
+const wsp = location.protocol === 'https:' ? 'wss' : 'ws'
+const ws = new WebSocket(`${wsp}://localhost:4000`)
 ws.onopen = () => console.log('opened.')
 ws.onmessage = (e) => {
   const data = JSON.parse(e.data)

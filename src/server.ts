@@ -1,10 +1,10 @@
 import { join } from 'https://deno.land/std@v0.42.0/path/mod.ts'
-import { serve, Server } from 'https://deno.land/std@v0.42.0/http/server.ts'
+import { serve } from 'https://deno.land/std@v0.42.0/http/server.ts'
 import { acceptWebSocket, WebSocket } from 'https://deno.land/std@v0.42.0/ws/mod.ts'
 const { readFile, transpileOnly, watchFs, cwd } = Deno
 
 /* common server */
-;(async function () {
+export async function commonServer() {
   const c = serve({ port: 3000 })
   console.log('server on 3000')
   for await (const req of c) {
@@ -28,9 +28,9 @@ const { readFile, transpileOnly, watchFs, cwd } = Deno
       req.respond({ body: '404' })
     }
   }
-})()
+}
 /* HMR server */
-;(async function () {
+export async function hmrServer() {
   const w = serve({ port: 4000 })
   console.log('hmr on 4000')
   for await (const req of w) {
@@ -44,7 +44,7 @@ const { readFile, transpileOnly, watchFs, cwd } = Deno
       .then((sock: WebSocket) => reload(sock))
       .catch((e) => console.error(e))
   }
-})()
+}
 
 async function transform(rootName: string, source: string) {
   const result = await transpileOnly({ [rootName]: source }, { strict: false, jsx: 'react', jsxFactory: 'h' })

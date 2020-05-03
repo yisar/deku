@@ -1,4 +1,4 @@
-import { h, render, useState } from './fre.js'
+import { h, render, useState } from './web_modules/fre.js'
 import A from './a.js'
 
 export default function App() {
