@@ -16,23 +16,19 @@ deno install --allow-net --allow-read --allow-write --unstable deku 'https://den
 deku create my-app // create a fre app
 ```
 
-#### install
-
 ```shell
 deku install // install modules from deku.json
 ```
 
-#### run
-
 ```shell
-deku
+deku // run
 ```
 
 ### todo
 
 - [x] hot reload
 
-- [] cli
+- [ ] cli
 
 #### How is this different form viet?
 
