@@ -5,7 +5,7 @@ import { blue } from 'https://deno.land/std@v0.42.0/fmt/colors.ts'
 
 const { readFile, transpileOnly, watchFs, cwd } = Deno
 
-const client = 'https://deno.land/x/deku/src/client.js'
+const client = 'https://cdn.staticaly.com/gh/yisar/deku/master/src/client.js?env=dev'
 
 /* common server */
 export async function commonServer() {

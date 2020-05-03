@@ -5,7 +5,7 @@ No-bundle Dev Server for morden ES modules.
 ### Install
 
 ```shell
-deno install -A --unstable deku 'https://deno.land/x/deku/mod.ts'
+deno install -A deku 'https://deno.land/x/deku/mod.ts' --unstable
 ```
 
 ### Use
