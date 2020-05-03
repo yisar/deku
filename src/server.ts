@@ -12,8 +12,7 @@ export async function commonServer() {
     if (url === '/') {
       console.log(path.posix.resolve())
       const data = await readFile('./index.html')
-      const client = await readFile('src/client.js')
-      const html = decoder(data) + '<script type="module">' + decoder(client) + '</script>'
+      const html = decoder(data) + '<script type="module" src="https://raw.githubusercontent.com/yisar/deku/master/src/client.js"></script>'
       req.respond({ body: html })
     } else if (/\.[j|t]sx?/.test(url)) {
       const filepath = cwd() + url
