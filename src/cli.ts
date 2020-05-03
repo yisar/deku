@@ -4,7 +4,7 @@ import { green } from 'https://deno.land/std@v0.42.0/fmt/colors.ts'
 
 const { cwd, exit } = Deno
 
-const url = 'https://deno.land/x/deku'
+const url = 'https://deno.land/x/deku/template/'
 const queue: Promise<unknown>[] = []
 
 export async function createRp(args: string[]) {
@@ -13,7 +13,7 @@ export async function createRp(args: string[]) {
     await ensureDir(localPath)
     const files = ['index.html', 'deku.json', 'index.js']
     files.forEach((file) => {
-      const rp = `${url}/template/${file}`
+      const rp = `${url}${file}`
       const lp = path.join(localPath, file)
       const p = fetch(rp)
         .then((res) => res.text())

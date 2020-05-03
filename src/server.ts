@@ -3,19 +3,20 @@ import { serve } from 'https://deno.land/std@v0.42.0/http/server.ts'
 import { acceptWebSocket, WebSocket } from 'https://deno.land/std@v0.42.0/ws/mod.ts'
 import { blue } from 'https://deno.land/std@v0.42.0/fmt/colors.ts'
 
-
 const { readFile, transpileOnly, watchFs, cwd } = Deno
+
+const client = 'https://deno.land/x/deku/src/client.js'
 
 /* common server */
 export async function commonServer() {
   const c = serve({ port: 3000 })
-  console.log(`${blue('Serve on')} localhost:3000`)
+  console.log(`${blue('Serve')} site on localhost:3000`)
   for await (const req of c) {
     const { url } = req
     if (url === '/') {
       console.log(path.posix.resolve())
       const data = await readFile('./index.html')
-      const html = decoder(data) + '<script type="module" src="https://cdn.staticaly.com/gh/yisar/deku/master/src/client.js?env=dev"></script>'
+      const html = decoder(data) + `<script type="module" src="${client}"></script>`
       req.respond({ body: html })
     } else if (/\.[j|t]sx?/.test(url)) {
       const filepath = cwd() + url
@@ -35,7 +36,7 @@ export async function commonServer() {
 /* HMR server */
 export async function hmrServer() {
   const w = serve({ port: 4000 })
-  console.log(`${blue('Serve on')} localhost:4000`)
+  console.log(`${blue('Serve')} HRM on localhost:4000`)
   for await (const req of w) {
     const { headers, conn, r, w } = req
     acceptWebSocket({
