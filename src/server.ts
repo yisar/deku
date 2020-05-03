@@ -1,12 +1,14 @@
 import * as path from 'https://deno.land/std@v0.42.0/path/mod.ts'
 import { serve } from 'https://deno.land/std@v0.42.0/http/server.ts'
 import { acceptWebSocket, WebSocket } from 'https://deno.land/std@v0.42.0/ws/mod.ts'
+import { blue } from 'https://deno.land/std@v0.42.0/fmt/colors.ts'
+
 const { readFile, transpileOnly, watchFs, cwd } = Deno
 
 /* common server */
 export async function commonServer() {
   const c = serve({ port: 3000 })
-  console.log('server on 3000')
+  console.log(`${blue('Serve on')} localhost:3000`)
   for await (const req of c) {
     const { url } = req
     if (url === '/') {
@@ -32,7 +34,7 @@ export async function commonServer() {
 /* HMR server */
 export async function hmrServer() {
   const w = serve({ port: 4000 })
-  console.log('hmr on 4000')
+  console.log(`${blue('Serve on')} localhost:4000`)
   for await (const req of w) {
     const { headers, conn, r, w } = req
     acceptWebSocket({

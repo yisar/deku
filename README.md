@@ -5,7 +5,7 @@ No-bundle Dev Server for Fre and JSX.
 ### run
 
 ```console
-deno --allow-net --allow-read --unstable 'https://deno.land/x/deku/mod.ts'
+deku create my-app //
 ```
 
 ### todo
