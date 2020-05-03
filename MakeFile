@@ -1,2 +1,2 @@
 run:
-	deno --allow-net --allow-read --unstable ./src/server.ts
+	deno --allow-net --allow-read --unstable --reload 'https://deno.land/x/deku/mod.ts'

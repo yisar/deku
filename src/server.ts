@@ -12,7 +12,7 @@ export async function commonServer() {
     if (url === '/') {
       console.log(path.posix.resolve())
       const data = await readFile('./index.html')
-      const html = decoder(data) + '<script type="module" src="https://raw.githubusercontent.com/yisar/deku/master/src/client.js"></script>'
+      const html = decoder(data) + '<script type="module" src="https://cdn.staticaly.com/gh/yisar/deku/master/src/client.js?env=dev"></script>'
       req.respond({ body: html })
     } else if (/\.[j|t]sx?/.test(url)) {
       const filepath = cwd() + url
