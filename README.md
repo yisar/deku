@@ -5,12 +5,10 @@ No-bundle Dev Server for morden ES modules.
 ### Install
 
 ```shell
-deno install --allow-net --allow-read --allow-write --unstable deku 'https://deno.land/x/deku/mod.ts'
+deno install -A --unstable deku 'https://deno.land/x/deku/mod.ts'
 ```
 
 ### Use
-
-#### create
 
 ```shell
 deku create my-app // create a fre app
