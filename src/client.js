@@ -1,4 +1,4 @@
-const ws = new WebSocket('ws://localhost:3000/')
+const ws = new WebSocket('ws://localhost:4000/')
 ws.onopen = () => console.log('opened.')
 ws.onmessage = (e) => {
   const { timestamp, path } = JSON.parse(e.data)
