@@ -66,7 +66,7 @@ async function reload(sock: WebSocket) {
     if (oldTime + 250 < timestamp || !oldTime) {
       sock.send(
         JSON.stringify({
-          type:'reload',
+          type: 'reload',
           timestamp,
           path: name,
         })

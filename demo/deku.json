@@ -1,0 +1,5 @@
+{
+  "modules": {
+    "fre": "https://unpkg.com/browse/fre@1.13.6/dist/fre.esm.js"
+  }
+}
