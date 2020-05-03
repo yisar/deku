@@ -1,10 +1,11 @@
 const ws = new WebSocket('ws://localhost:4000/')
 ws.onopen = () => console.log('opened.')
 ws.onmessage = (e) => {
-  const { timestamp, path } = JSON.parse(e.data)
-  console.log(path)
-  document.body.innerHTML = ''
-  import('./index.js' + `?t=${timestamp}`)
+  const data = JSON.parse(e.data)
+  console.log(data)
+  if (data.type === 'reload') {
+    window.location.reload()
+  }
 }
 
 ws.onerror = (e) => console.error(e)

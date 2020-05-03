@@ -14,14 +14,16 @@ const { readFile, transpileOnly, watchFs, cwd } = Deno
       const client = await readFile(join('.', 'src/client.js'))
       const html = decoder(data) + '<script type="module">' + decoder(client) + '</script>'
       req.respond({ body: html })
-    } else if (/\.[j|t]sx?$/.test(url)) {
+    } else if (/\.[j|t]sx?/.test(url)) {
       const filepath = cwd() + url
-      const data = await readFile(filepath)
-      const source = decoder(data)
-      const code = await transform(url, source)
-      const headers = new Headers()
-      headers.set('content-type', 'application/javascript')
-      req.respond({ body: code, headers })
+      try {
+        const data = await readFile(filepath)
+        const source = decoder(data)
+        const code = await transform(url, source)
+        const headers = new Headers()
+        headers.set('content-type', 'application/javascript')
+        req.respond({ body: code, headers })
+      } catch (e) {}
     } else {
       req.respond({ body: '404' })
     }
@@ -61,10 +63,10 @@ async function reload(sock: WebSocket) {
     const timestamp = new Date().getTime()
     const oldTime = timeMap.get(path)
     const name = path.replace(/\\\\/g, '\\').replace(cwd(), '')
-    console.log(name)
     if (oldTime + 250 < timestamp || !oldTime) {
       sock.send(
         JSON.stringify({
+          type:'reload',
           timestamp,
           path: name,
         })
