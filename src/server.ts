@@ -1,4 +1,4 @@
-import { join } from 'https://deno.land/std@v0.42.0/path/mod.ts'
+import * as path from 'https://deno.land/std@v0.42.0/path/mod.ts'
 import { serve } from 'https://deno.land/std@v0.42.0/http/server.ts'
 import { acceptWebSocket, WebSocket } from 'https://deno.land/std@v0.42.0/ws/mod.ts'
 const { readFile, transpileOnly, watchFs, cwd } = Deno
@@ -10,9 +10,9 @@ export async function commonServer() {
   for await (const req of c) {
     const { url } = req
     if (url === '/') {
-      console.log(cwd())
+      console.log(path.posix.resolve())
       const data = await readFile('./index.html')
-      const client = await readFile(join('.', './client.js'))
+      const client = await readFile('src/client.js')
       const html = decoder(data) + '<script type="module">' + decoder(client) + '</script>'
       req.respond({ body: html })
     } else if (/\.[j|t]sx?/.test(url)) {
