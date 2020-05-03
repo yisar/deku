@@ -10,8 +10,9 @@ export async function commonServer() {
   for await (const req of c) {
     const { url } = req
     if (url === '/') {
+      console.log(cwd())
       const data = await readFile('./index.html')
-      const client = await readFile(join('.', 'src/client.js'))
+      const client = await readFile(join('.', './client.js'))
       const html = decoder(data) + '<script type="module">' + decoder(client) + '</script>'
       req.respond({ body: html })
     } else if (/\.[j|t]sx?/.test(url)) {
