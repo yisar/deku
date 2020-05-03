@@ -22,6 +22,7 @@ export async function createRp(args: string[]) {
       queue.push(p)
     })
     await Promise.all(queue)
+    exit(1)
   } else if (args[0] === 'install') {
     const data = (await readJson('./deku.json')) as Deku
     const localPath = path.join('./', cwd(), 'web_modules')
@@ -37,8 +38,8 @@ export async function createRp(args: string[]) {
       queue.push(p)
     }
     await Promise.all(queue)
+    exit(1)
   }
-  exit(1)
 }
 
 type Deku = { modules: Record<string, string> }
