@@ -349,6 +349,7 @@ function updateHOOK(WIP) {
     return
   }
   currentFiber = WIP;
+  WIP.type.WIP = WIP;
   resetCursor();
   let children = WIP.type(WIP.props);
   if (isStr(children)) {
@@ -552,5 +553,5 @@ const Fre = {
 };
 
 export default Fre;
-export { Fragment, h as createElement, h, memo, render, scheduleWork, useCallback, useEffect, useLayout, useLayout as useLayoutEffect, useMemo, useReducer, useRef, useState };
+export { Fragment, h as createElement, h, memo, render, scheduleWork, useCallback, useEffect, useLayout, useLayout as useLayoutEffect, useMemo, useReducer, useRef, useState, getCurrentFiber };
 

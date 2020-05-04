@@ -16,7 +16,8 @@ export async function commonServer() {
     if (url === '/') {
       console.log(path.posix.resolve())
       const data = await readFile('./index.html')
-      const html = decoder(data) + `<script type="module" src="${client}"></script>`
+      const html = decoder(data)
+      // + `<script type="module" src="${client}"></script>`
       req.respond({ body: html })
     } else if (/\.[j|t]sx?/.test(url)) {
       const filepath = cwd() + url
@@ -51,7 +52,7 @@ export async function hmrServer() {
 }
 
 async function transform(rootName: string, source: string) {
-  const result = await transpileOnly({ [rootName]: source }, { strict: false, jsx: 'react', jsxFactory: 'h' })
+  const result = await transpileOnly({ [rootName]: source }, { strict: false, jsx: 'react', jsxFactory: 'h', sourceMap: false })
   return result[rootName].source
 }
 
