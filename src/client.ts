@@ -1,7 +1,7 @@
 import { scheduleWork, h } from './fre.js'
 const wsp = location.protocol === 'https:' ? 'wss' : 'ws'
 const ws = new WebSocket(`${wsp}://localhost:4000`)
-ws.onopen = () => console.log('opened.')
+
 ws.onmessage = (e) => {
   const { path, timestamp } = JSON.parse(e.data)
   if (path.endsWith('.css')) {
@@ -38,4 +38,5 @@ ws.onmessage = (e) => {
 }
 
 ws.onerror = (e) => console.error(e)
-ws.onclose = (e) => console.log('closed.')
+ws.onopen = () => console.log('opened.')
+ws.onclose = () => console.log('closed.')
