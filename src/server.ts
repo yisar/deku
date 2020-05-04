@@ -12,10 +12,8 @@ export async function commonServer() {
   for await (const req of c) {
     const { url } = req
     if (url === '/') {
-      // console.log(path.posix.resolve())
       const data = await readFile('./index.html')
       const html = decoder(data) + `<script type="module" src="./web_modules/deku.js"></script>`
-      console.log(html)
       req.respond({ body: html })
     } else if (/\.[j|t]sx?/.test(url)) {
       const p = url.split('?')
@@ -66,7 +64,7 @@ async function reload(sock: WebSocket) {
     const path = await event.paths[0]
     const timestamp = new Date().getTime()
     const oldTime = timeMap.get(path)
-    const name = path.replace(cwd() + '\\', './')
+    const name = path.replace(cwd() + '\\', '../')
     if (oldTime + 250 < timestamp || !oldTime) {
       sock.send(
         JSON.stringify({
