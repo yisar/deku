@@ -15,8 +15,8 @@ ws.onmessage = (e) => {
           scheduleWork(c)
         })
       } else {
-        // common js just execute
-        for (const name in mod) mod[name]()
+        // common js just reload
+        window.location.reload()
       }
     })
   }
