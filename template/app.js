@@ -1,4 +1,4 @@
-import { h, render, useState } from './web_modules/fre.js'
+import { h, useState } from './web_modules/fre.js'
 import A from './a.js'
 
 export default function App() {
@@ -6,10 +6,8 @@ export default function App() {
   return (
     <div>
       <A/>
-      <h1>hello fre！</h1>
+      <h1>hello fre!</h1>
       <button onClick={() => setCount(count + 1)}>{count}</button>
     </div>
   )
 }
-
-render(<App />, document.body)

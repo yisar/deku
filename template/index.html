@@ -1,3 +1,6 @@
-<div id="root"></div>
-<script type="module" src="./index.js"></script>
-<script type="module" src="https://cdn.staticaly.com/gh/yisar/deku/master/src/client.js?env=dev"></script>
+<div id="app"></div>
+<script type="module">
+  import { h, render } from './web_modules/fre.js'
+  import App from './app.js'
+  render(h(App, null),document.getElementById('app'))
+</script>
