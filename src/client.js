@@ -6,9 +6,9 @@ ws.onmessage = (e) => {
   const { type, path, timestamp } = JSON.parse(e.data)
   if (type === 'reload') {
     import(path).then((mod) => {
-      const fiber = mod.default.WIP
-      if (fiber) {
+      if (mod.default && mod.default.WIP) {
         // this is a Compoent
+        const fiber = mod.default.WIP
         import(`${path}?t=${timestamp}`).then((mod) => {
           const vdom = h(mod.default, fiber.props)
           let c = { ...fiber, ...vdom }
