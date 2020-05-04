@@ -5,8 +5,6 @@ import { blue } from 'https://deno.land/std@v0.42.0/fmt/colors.ts'
 
 const { readFile, transpileOnly, watchFs, cwd } = Deno
 
-const client = 'https://cdn.staticaly.com/gh/yisar/deku/master/src/client.js?env=dev'
-
 /* common server */
 export async function commonServer() {
   const c = serve({ port: 3000 })
@@ -14,17 +12,18 @@ export async function commonServer() {
   for await (const req of c) {
     const { url } = req
     if (url === '/') {
-      console.log(path.posix.resolve())
+      // console.log(path.posix.resolve())
       const data = await readFile('./index.html')
       const html = decoder(data)
       // + `<script type="module" src="${client}"></script>`
       req.respond({ body: html })
     } else if (/\.[j|t]sx?/.test(url)) {
-      const filepath = cwd() + url
+      const p = url.split('?')
+      const filepath = cwd() + p[0]
       try {
         const data = await readFile(filepath)
         const source = decoder(data)
-        const code = await transform(url, source)
+        const code = await transform(p[0], source)
         const headers = new Headers()
         headers.set('content-type', 'application/javascript')
         req.respond({ body: code, headers })
@@ -67,7 +66,7 @@ async function reload(sock: WebSocket) {
     const path = await event.paths[0]
     const timestamp = new Date().getTime()
     const oldTime = timeMap.get(path)
-    const name = path.replace(/\\\\/g, '\\').replace(cwd(), '')
+    const name = path.replace(cwd() + '\\', './')
     if (oldTime + 250 < timestamp || !oldTime) {
       sock.send(
         JSON.stringify({
