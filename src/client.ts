@@ -23,14 +23,19 @@ ws.onmessage = (e) => {
         const m = mods[name]
         if (m.WIP) {
           const fiber = m.WIP
-          import(`${path}?t=${timestamp}`).then(() => {
-            const vdom = h(m, fiber.props)
+          import(`${path}?t=${timestamp}`).then(mods => {
+            const vdom = h(mods[name], fiber.props)
             let c = { ...fiber, ...vdom }
             scheduleWork(c)
           })
         } else {
-          window.location.reload()
-          break
+          if (m.length > 0) {
+            // no args, execute it.
+            import(`${path}?t=${timestamp}`).then((mods) => mods[name]())
+          } else {
+            window.location.reload()
+            break
+          }
         }
       }
     })
