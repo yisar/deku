@@ -22,19 +22,13 @@ deku install // install modules from deku.json
 deku // run
 ```
 
-### Hot reload
-
-if you export default a component, it will rerender only.
-
-Any other case it will reload.
-
 ### todo
 
 - [x] hot reload
 
-- [ ] cli
+- [x] cli
 
-#### How is this different form viet?
+#### How is this different form viet or pika?
 
 This is for Fre but not Vue, and use deno instead of node without node_modules.
 
