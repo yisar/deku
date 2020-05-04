@@ -15,10 +15,8 @@ ws.onmessage = (e) => {
           scheduleWork(c)
         })
       } else {
-        // js
-        import(`${path}?t=${timestamp}`).then((mod) => {
-          for (const key in mod) mod[key]()
-        })
+        // common js just execute
+        for (const name in mod) mod[name]()
       }
     })
   }
