@@ -26,6 +26,12 @@ export async function commonServer() {
         headers.set('content-type', 'application/javascript')
         req.respond({ body: code, headers })
       } catch (e) {}
+    } else if (url.endsWith('.css')) {
+      const data = await readFile(cwd() + url)
+      const css = decoder(data)
+      const headers = new Headers()
+      headers.set('content-type', 'text/css')
+      req.respond({ body: css, headers })
     } else {
       req.respond({ body: '404' })
     }
@@ -68,12 +74,11 @@ async function reload(sock: WebSocket) {
     if (oldTime + 250 < timestamp || !oldTime) {
       sock.send(
         JSON.stringify({
-          type: 'reload',
           timestamp,
           path: name,
         })
       )
-      console.log(`${blue('reload')} ${path}`)
+      console.log(`${blue(event.kind)} ${path}`)
     }
     timeMap.set(path, timestamp)
   }
