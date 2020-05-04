@@ -11,7 +11,7 @@ export async function createRp(args: string[]) {
   if (args[0] === 'create') {
     const localPath = path.join('./', cwd(), args[1])
     await ensureDir(localPath)
-    const files = ['index.html', 'deku.json', 'index.js']
+    const files = ['index.html', 'deku.json', 'app.js', 'style.css']
     files.forEach((file) => {
       const rp = `${url}${file}`
       const lp = path.join(localPath, file)
