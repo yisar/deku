@@ -2,6 +2,12 @@
 
 No-bundle Dev Server for morden ES modules.
 
+
+[![tag](https://img.shields.io/github/tag/yisar/deku.svg)](https://github.com/yisar/deku)
+[![Build Status](https://github.com/yisar/deku/workflows/ci/badge.svg?branch=master)](https://github.com/yisar/deku/actions)
+[![license](https://img.shields.io/github/license/yisar/deku.svg)](https://github.com/yisar/deku)
+[![tag](https://img.shields.io/badge/deno-v0.42.0-green.svg)](https://github.com/denoland/deno)
+
 ### Install
 
 ```shell
