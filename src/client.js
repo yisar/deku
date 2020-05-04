@@ -1,4 +1,4 @@
-import { getCurrentFiber, scheduleWork, h } from './web_modules/fre.js'
+import { scheduleWork, h } from './web_modules/fre.js'
 const wsp = location.protocol === 'https:' ? 'wss' : 'ws'
 const ws = new WebSocket(`${wsp}://localhost:4000`)
 ws.onopen = () => console.log('opened.')
