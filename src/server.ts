@@ -75,6 +75,7 @@ async function reload(sock: WebSocket) {
           path: name,
         })
       )
+      console.log(`${blue('reload')} ${path}`)
     }
     timeMap.set(path, timestamp)
   }
