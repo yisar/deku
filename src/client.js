@@ -14,6 +14,11 @@ ws.onmessage = (e) => {
           let c = { ...fiber, ...vdom }
           scheduleWork(c)
         })
+      } else {
+        // js
+        import(`${path}?t=${timestamp}`).then((mod) => {
+          for (const key in mod) mod[key]()
+        })
       }
     })
   }
