@@ -4,7 +4,6 @@ import { acceptWebSocket, WebSocket } from 'https://deno.land/std@v0.42.0/ws/mod
 import { blue } from 'https://deno.land/std@v0.42.0/fmt/colors.ts'
 
 const { readFile, transpileOnly, watchFs, cwd } = Deno
-const client = `./web_modules/deku-client.js?env=dev`
 
 /* common server */
 export async function commonServer() {
@@ -15,8 +14,8 @@ export async function commonServer() {
     if (url === '/') {
       // console.log(path.posix.resolve())
       const data = await readFile('./index.html')
-      const c = await fetch(client).then((res) => res.text())
-      const html = decoder(data) + `<script type="module">${c}</script>`
+      const html = decoder(data) + `<script type="module" src="./web_modules/deku.js"></script>`
+      console.log(html)
       req.respond({ body: html })
     } else if (/\.[j|t]sx?/.test(url)) {
       const p = url.split('?')
