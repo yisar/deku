@@ -20,7 +20,6 @@ export async function commonServer() {
     } else if (/\.[j|t]sx?/.test(url)) {
       const p = url.split('?')
       const filepath = cwd() + p[0]
-      console.log(filepath)
       try {
         const data = await readFile(filepath)
         const source = decoder(data)
