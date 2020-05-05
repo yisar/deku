@@ -33,7 +33,7 @@ ws.onmessage = (e) => {
             scheduleWork(c)
           })
         } else {
-          if (m.length > 0) {
+          if (m.length = 0) {
             // no args, execute it.
             import(`${path}?t=${timestamp}`).then((mods) => mods[name]())
           } else {
