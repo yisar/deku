@@ -46,14 +46,13 @@ export async function hmrServer() {
   console.log(`${blue('Serve')} HRM on localhost:4000`)
   for await (const req of w) {
     const { headers, conn, r, w } = req
-    acceptWebSocket({
+    const sock = await acceptWebSocket({
       conn,
       headers,
       bufReader: r,
       bufWriter: w,
     })
-      .then((sock: WebSocket) => reload(sock))
-      .catch((e) => console.error(e))
+    await reload(sock)
   }
 }
 
