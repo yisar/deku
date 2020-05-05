@@ -549,9 +549,8 @@ const Fre = {
   useMemo,
   useCallback,
   useRef,
-  memo,
-  options
+  memo
 };
 
 export default Fre;
-export { Fragment, h as createElement, h, memo, options, render, scheduleWork, useCallback, useEffect, useLayout, useLayout as useLayoutEffect, useMemo, useReducer, useRef, useState };
+export { Fragment, h as createElement, h, memo, render, scheduleWork, useCallback, useEffect, useLayout, useLayout as useLayoutEffect, useMemo, useReducer, useRef, useState };

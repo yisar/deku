@@ -1,8 +1,4 @@
-import { scheduleWork, h, options } from './fre.js'
-
-options.updateHook = (WIP) => {
-  WIP.type.fiber = WIP
-}
+import { scheduleWork, h } from './fre.js'
 
 const wsp = location.protocol === 'https:' ? 'wss' : 'ws'
 const ws = new WebSocket(`${wsp}://localhost:4000`)
@@ -48,6 +44,8 @@ ws.onmessage = (e) => {
   }
 }
 
-ws.onerror = (e) => console.error(e)
+ws.onerror = (e) => {
+  throw e
+}
 ws.onopen = () => console.log('opened.')
 ws.onclose = () => console.log('closed.')

@@ -1,6 +1,6 @@
 {
   "modules": {
-    "fre": "https://unpkg.com/fre@1.13.7/dist/fre.esm.js",
+    "fre": "https://unpkg.com/fre@1.13.8/dist/fre.esm.js",
     "deku": "https://deno.land/x/deku/src/client.ts"
   }
 }
