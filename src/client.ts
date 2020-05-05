@@ -1,6 +1,10 @@
-import { scheduleWork, h } from './fre.js'
+import { scheduleWork, h, options } from './fre.js'
 const wsp = location.protocol === 'https:' ? 'wss' : 'ws'
 const ws = new WebSocket(`${wsp}://localhost:4000`)
+
+options.updateHook = WIP =>{
+  WIP.type.fiber = WIP
+}
 
 ws.onmessage = (e) => {
   const { path, timestamp } = JSON.parse(e.data)
@@ -21,8 +25,8 @@ ws.onmessage = (e) => {
      */
       for (const name in mods) {
         const m = mods[name]
-        if (m.WIP) {
-          const fiber = m.WIP
+        if (m.fiber) {
+          const fiber = m.fiber
           import(`${path}?t=${timestamp}`).then(mods => {
             const vdom = h(mods[name], fiber.props)
             let c = { ...fiber, ...vdom }
