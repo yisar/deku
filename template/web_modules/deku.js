@@ -24,7 +24,8 @@ ws.onmessage = (e) => {
         if (m.WIP) {
           const fiber = m.WIP
           import(`${path}?t=${timestamp}`).then(mods => {
-            const vdom = h(mods[name], fiber.props)
+            const vdom = h(m, fiber.props)
+            console.log(vdom)
             let c = { ...fiber, ...vdom }
             scheduleWork(c)
           })
@@ -42,6 +43,8 @@ ws.onmessage = (e) => {
   }
 }
 
-ws.onerror = (e) => console.error(e)
+ws.onerror = (e) => {
+  throw e
+}
 ws.onopen = () => console.log('opened.')
 ws.onclose = () => console.log('closed.')
