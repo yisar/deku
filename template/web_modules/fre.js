@@ -349,6 +349,7 @@ function updateHOOK(WIP) {
     return
   }
   currentFiber = WIP;
+  WIP.type.fiber = WIP;
   resetCursor();
   let children = WIP.type(WIP.props);
   if (isStr(children)) {
@@ -453,7 +454,7 @@ function shouldPlace(fiber) {
 
 function commitWork(fiber) {
   commitQueue.forEach(c => c.parent && commit(c));
-  fiber.done && fiber.done();
+  fiber.done && fiber.done(fiber);
   commitQueue = [];
   preCommit = null;
   WIP = null;
@@ -548,8 +549,9 @@ const Fre = {
   useMemo,
   useCallback,
   useRef,
-  memo
+  memo,
+  options
 };
 
 export default Fre;
-export { Fragment, h as createElement, h, memo, render, scheduleWork, useCallback, useEffect, useLayout, useLayout as useLayoutEffect, useMemo, useReducer, useRef, useState };
+export { Fragment, h as createElement, h, memo, options, render, scheduleWork, useCallback, useEffect, useLayout, useLayout as useLayoutEffect, useMemo, useReducer, useRef, useState };

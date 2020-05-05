@@ -13,8 +13,10 @@ export async function commonServer() {
     const { url } = req
     if (url === '/') {
       const data = await readFile('./index.html')
-      const html = decoder(data) + `<script type="module" src="./web_modules/deku.js"></script>`
+      const html = `<script type="module" src="./web_modules/deku.js"></script>` + decoder(data)
       req.respond({ body: html })
+    } else if (url.endsWith('.map')) {
+      continue
     } else if (/\.[j|t]sx?/.test(url)) {
       const p = url.split('?')
       const filepath = cwd() + p[0]
