@@ -5,12 +5,12 @@ No-bundle Dev Server for morden ES modules.
 [![Build Status](https://github.com/yisar/deku/workflows/ci/badge.svg?branch=master)](https://github.com/yisar/deku/actions)
 [![tag](https://img.shields.io/github/tag/yisar/deku.svg)](https://github.com/yisar/deku)
 [![license](https://img.shields.io/github/license/yisar/deku.svg)](https://github.com/yisar/deku)
-[![tag](https://img.shields.io/badge/deno-v0.42.0-green.svg)](https://github.com/denoland/deno)
+[![tag](https://img.shields.io/badge/deno>rc1.0-blue.svg)](https://github.com/denoland/deno)
 
 ### Install
 
 ```shell
-deno install -A --unstable deku 'https://deno.land/x/deku/mod.ts'
+deno install -A --unstable 'https://deno.land/x/deku/mod.ts'
 ```
 
 ### Use
