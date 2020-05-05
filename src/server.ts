@@ -18,6 +18,7 @@ export async function commonServer() {
     } else if (/\.[j|t]sx?/.test(url)) {
       const p = url.split('?')
       const filepath = cwd() + p[0]
+      console.log(filepath)
       try {
         const data = await readFile(filepath)
         const source = decoder(data)
@@ -25,7 +26,9 @@ export async function commonServer() {
         const headers = new Headers()
         headers.set('content-type', 'application/javascript')
         req.respond({ body: code, headers })
-      } catch (e) {}
+      } catch (e) {
+        console.error(e)
+      }
     } else if (url.endsWith('.css')) {
       const data = await readFile(cwd() + url)
       const css = decoder(data)
