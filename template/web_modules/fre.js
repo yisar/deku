@@ -349,7 +349,6 @@ function updateHOOK(WIP) {
     return
   }
   currentFiber = WIP;
-  WIP.type.WIP = WIP;
   resetCursor();
   let children = WIP.type(WIP.props);
   if (isStr(children)) {
