@@ -1,3 +1,12 @@
-body {
-  color: #E91E63;
+.container {
+  margin: 30px;
+}
+h1 {
+  color: #e91e63;
+}
+button {
+  color: #fff;
+  background: #3f51b5;
+  border: none;
+  padding: 4px 15px;
 }
