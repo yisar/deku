@@ -22,7 +22,6 @@ ws.onmessage = (e) => {
      */
       for (const name in mods) {
         const m = mods[name]
-        console.log(m.fiber)
         if (m.fiber) {
           const fiber = m.fiber
           import(`${path}?t=${timestamp}`).then((mods) => {
