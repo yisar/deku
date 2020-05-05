@@ -74,7 +74,7 @@ async function reload(sock: WebSocket) {
     const timestamp = new Date().getTime()
     const oldTime = timeMap.get(path)
     const name = path.replace(cwd() + '\\', '../')
-    if (oldTime + 250 < timestamp || !oldTime) {
+    if (oldTime + 1000 < timestamp || !oldTime) {
       sock.send(
         JSON.stringify({
           timestamp,
